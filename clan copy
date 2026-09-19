@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLAN — Climate Leaders Action Network</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                            dark: '#022c22'
+                        },
+                        amberAccent: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar & glassmorphism styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #064e3b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #10b981;
+            border-radius: 4px;
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .dark .glass-header {
+            background: rgba(6, 78, 59, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.15);
+        }
+        .dark .glass-card {
+            background: rgba(2, 44, 34, 0.6);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-emerald-50/40 dark:bg-[#021f18] text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300">
+
+    <!-- NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-header border-b border-emerald-100 dark:border-emerald-800/40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-brand-600/30 group-hover:scale-105 transition-transform">
+                    <i data-lucide="leaf" class="w-6 h-6"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-xl tracking-tight text-brand-900 dark:text-emerald-300 leading-none">CLAN</span>
+                    <span class="text-[10px] font-semibold text-brand-600 dark:text-emerald-400 tracking-wider uppercase mt-1">Climate Leaders Action Network</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center gap-6 font-medium text-sm text-slate-700 dark:text-slate-200">
+                <a href="#home" class="hover:text-brand-600 dark:hover:text-emerald-400 transition-colors">Home</a>
+                <a href="#about" class="hover:text-brand-600 dark:hover:text-emerald-400 transition-colors">About Us</a>
+                <a href="#process" class="hover:text-brand-600 dark:hover:text-emerald-400 transition-colors">Our Approach</a>
+                <a href="#pillars" class="hover:text-brand-600 dark:hover:text-emerald-400 transition-colors">Core Pillars</a>
+                <a href="#structure" class="hover:text-brand-600 dark:hover:text-emerald-400 transition-colors">Structure</a>
+                <a href="#stories" class="hover:text-brand-600 dark:hover:text-emerald-400 transition-colors">Stories</a>
+                <a href="#gallery" class="hover:text-brand-600 dark:hover:text-emerald-400 transition-colors">Gallery</a>
+                <a href="#contact" class="hover:text-brand-600 dark:hover:text-emerald-400 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="hidden lg:flex items-center gap-4">
+                <button id="themeToggle" class="p-2.5 rounded-xl bg-emerald-100/60 dark:bg-emerald-900/50 text-brand-800 dark:text-emerald-200 hover:bg-emerald-200 dark:hover:bg-emerald-800 transition-colors">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                </button>
+                <a href="#join" class="inline-flex items-center gap-2 bg-gradient-to-r from-brand-600 to-emerald-500 hover:from-brand-700 hover:to-emerald-600 text-white font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-brand-600/25 hover:shadow-brand-600/40 hover:-translate-y-0.5 transition-all">
+                    <span>Join CLAN</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="flex lg:hidden items-center gap-2">
+                <button id="mobileThemeToggle" class="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-brand-800 dark:text-emerald-200">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                </button>
+                <button id="menuBtn" class="p-2 text-slate-700 dark:text-slate-200 hover:text-brand-600 focus:outline-none">
+                    <i data-lucide="menu" class="w-7 h-7"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white dark:bg-brand-900 border-b border-emerald-100 dark:border-emerald-800 px-6 py-6 space-y-4 shadow-xl">
+            <a href="#home" class="block font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 mobile-link">Home</a>
+            <a href="#about" class="block font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 mobile-link">About Us</a>
+            <a href="#process" class="block font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 mobile-link">Our Approach</a>
+            <a href="#pillars" class="block font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 mobile-link">Core Pillars</a>
+            <a href="#structure" class="block font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 mobile-link">Structure</a>
+            <a href="#stories" class="block font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 mobile-link">Stories & News</a>
+            <a href="#gallery" class="block font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 mobile-link">Gallery</a>
+            <a href="#contact" class="block font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 mobile-link">Contact</a>
+            <a href="#join" class="block w-full text-center bg-brand-600 text-white font-semibold py-3 rounded-xl mobile-link">Join CLAN</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden">
+        <!-- Decorative Ambient Glowing Circles -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-400/20 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/3 right-10 w-80 h-80 bg-amber-400/20 dark:bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-emerald-100 dark:bg-emerald-900/60 text-brand-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700/50 mb-6">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-amberAccent-500"></i> Youth-Led Climate Action
+                </span>
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+                    CLAN — Climate Leaders <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-emerald-500 to-amberAccent-500">Action Network</span>
+                </h1>
+                <p class="text-xl font-semibold text-brand-700 dark:text-emerald-400 mt-4">
+                    Young people. Collective action. Climate action.
+                </p>
+                <p class="text-lg text-slate-600 dark:text-slate-300 mt-2 font-medium">
+                    Leadership, collaboration, and collective action on climate.
+                </p>
+                <p class="text-base text-slate-600 dark:text-slate-400 mt-6 leading-relaxed">
+                    CLAN — the Climate Leaders Action Network — brings together young climate leaders working to connect, strengthen, and support youth-led climate action across regions.
+                </p>
+
+                <!-- Primary Action Buttons -->
+                <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#join" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-emerald-500 text-white font-bold text-base shadow-xl shadow-brand-600/30 hover:shadow-brand-600/50 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                        <span>Join CLAN</span>
+                        <i data-lucide="users" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#pillars" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white dark:bg-brand-900 border-2 border-emerald-500/30 dark:border-emerald-700 text-slate-800 dark:text-emerald-200 font-bold text-base hover:bg-emerald-50 dark:hover:bg-brand-800 transition-all flex items-center justify-center gap-2">
+                        <span>Explore Our Work</span>
+                        <i data-lucide="compass" class="w-5 h-5 text-brand-600 dark:text-emerald-400"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Key Stats Cards Grid -->
+            <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card p-6 rounded-2xl shadow-lg border hover:border-brand-500 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/50 text-brand-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <div class="text-3xl font-extrabold text-slate-900 dark:text-white">116+</div>
+                    <p class="text-sm font-semibold text-slate-600 dark:text-slate-300 mt-1">Young people connected across regions</p>
+                    <a href="#join" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 dark:text-emerald-400 group-hover:gap-2.5 transition-all">
+                        Join the Network <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-lg border hover:border-brand-500 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-950/50 text-amberAccent-600 dark:text-amberAccent-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="map-pin" class="w-6 h-6"></i>
+                    </div>
+                    <div class="text-3xl font-extrabold text-slate-900 dark:text-white">4+</div>
+                    <p class="text-sm font-semibold text-slate-600 dark:text-slate-300 mt-1">Active States in India & Expanding</p>
+                    <span class="mt-4 block text-xs font-medium text-slate-500 dark:text-slate-400">State-level Hubs</span>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-lg border hover:border-brand-500 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/50 text-brand-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <div class="text-3xl font-extrabold text-slate-900 dark:text-white">21</div>
+                    <p class="text-sm font-semibold text-slate-600 dark:text-slate-300 mt-1">Executive Committee Members</p>
+                    <span class="mt-4 block text-xs font-medium text-slate-500 dark:text-slate-400">Democratic Governance</span>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-lg border hover:border-brand-500 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="award" class="w-6 h-6"></i>
+                    </div>
+                    <div class="text-3xl font-extrabold text-slate-900 dark:text-white">5</div>
+                    <p class="text-sm font-semibold text-slate-600 dark:text-slate-300 mt-1">Core Elected Representatives</p>
+                    <a href="#structure" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-teal-600 dark:text-teal-400 group-hover:gap-2.5 transition-all">
+                        View Structure <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE JOURNEY / PROCESS FLOW SECTION -->
+    <section id="process" class="py-20 bg-emerald-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-emerald-400 text-sm font-bold tracking-widest uppercase">How We Drive Change</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-2">The CLAN Action Cycle</h2>
+                <p class="text-emerald-200/80 mt-3">From building relationships to implementing grassroots climate solutions.</p>
+            </div>
+
+            <!-- Steps Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                <!-- Step 1 -->
+                <div class="process-card bg-emerald-800/60 backdrop-blur-md rounded-2xl p-6 border border-emerald-700/50 hover:bg-emerald-800 transition-all duration-300 group cursor-pointer">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-300 font-extrabold text-xl flex items-center justify-center border border-emerald-500/30 group-hover:bg-emerald-500 group-hover:text-white transition-all">01</span>
+                        <i data-lucide="network" class="w-8 h-8 text-emerald-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">CONNECT</h3>
+                    <p class="text-emerald-200/90 text-sm leading-relaxed">
+                        Build relationships across communities, regions and areas of expertise to create a unified youth network.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="process-card bg-emerald-800/60 backdrop-blur-md rounded-2xl p-6 border border-emerald-700/50 hover:bg-emerald-800 transition-all duration-300 group cursor-pointer">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-300 font-extrabold text-xl flex items-center justify-center border border-emerald-500/30 group-hover:bg-emerald-500 group-hover:text-white transition-all">02</span>
+                        <i data-lucide="book-open" class="w-8 h-8 text-amberAccent-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">LEARN</h3>
+                    <p class="text-emerald-200/90 text-sm leading-relaxed">
+                        Share knowledge, experiences and perspectives to better understand regional and systemic climate challenges.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="process-card bg-emerald-800/60 backdrop-blur-md rounded-2xl p-6 border border-emerald-700/50 hover:bg-emerald-800 transition-all duration-300 group cursor-pointer">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-300 font-extrabold text-xl flex items-center justify-center border border-emerald-500/30 group-hover:bg-emerald-500 group-hover:text-white transition-all">03</span>
+                        <i data-lucide="users-2" class="w-8 h-8 text-emerald-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">COLLABORATE</h3>
+                    <p class="text-emerald-200/90 text-sm leading-relaxed">
+                        Work with local communities, self-governments, educational institutions, and civil society actors.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="process-card bg-emerald-800/60 backdrop-blur-md rounded-2xl p-6 border border-emerald-700/50 hover:bg-emerald-800 transition-all duration-300 group cursor-pointer">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-300 font-extrabold text-xl flex items-center justify-center border border-emerald-500/30 group-hover:bg-emerald-500 group-hover:text-white transition-all">04</span>
+                        <i data-lucide="zap" class="w-8 h-8 text-amberAccent-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">ACT</h3>
+                    <p class="text-emerald-200/90 text-sm leading-relaxed">
+                        Turn ideas and shared knowledge into meaningful, scalable, and locally relevant climate action projects.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section id="about" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Story Column -->
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="px-3.5 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-brand-100 dark:bg-emerald-900/60 text-brand-800 dark:text-emerald-300">
+                        Featured Section
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                        A network for collective climate action
+                    </h2>
+                    <p class="text-xl font-medium text-brand-700 dark:text-emerald-400">
+                        CLAN is building a space where young people can explore, co-create and actively engage in climate action.
+                    </p>
+                    <div class="prose dark:prose-invert text-slate-600 dark:text-slate-300 leading-relaxed space-y-4">
+                        <p>
+                            <strong>Our Story:</strong> The Climate Leaders Action Network (CLAN) is a flexible and responsive platform where young people come together to explore, connect, co-create, strengthen, and actively engage in climate action.
+                        </p>
+                        <p>
+                            Initially formed by individuals who completed the Climate Leadership Program (CLP), CLAN is now active across four states with a growing network of over 100 members. The network is expanding its membership to welcome a wider circle of young people committed to advancing community-centred climate solutions.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Vision & Mission Cards -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="p-8 rounded-2xl bg-gradient-to-br from-brand-700 to-emerald-900 text-white shadow-xl relative overflow-hidden group">
+                        <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="eye" class="w-7 h-7 text-amberAccent-400"></i>
+                            <h3 class="text-2xl font-bold">Our Vision</h3>
+                        </div>
+                        <p class="text-emerald-100 leading-relaxed text-sm">
+                            A just, resilient and regenerative future where young people are empowered to shape climate action, strengthen communities, and create a more sustainable world together.
+                        </p>
+                    </div>
+
+                    <div class="p-8 rounded-2xl bg-white dark:bg-brand-900/80 border border-emerald-100 dark:border-emerald-800 shadow-xl relative overflow-hidden group">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="target" class="w-7 h-7 text-brand-600 dark:text-emerald-400"></i>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Our Mission</h3>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-sm">
+                            To connect, equip and support young people to understand climate challenges, collaborate with communities and diverse stakeholders, share knowledge, and take meaningful collective action for a just and climate-resilient future.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Our Values Cards Grid -->
+            <div class="mt-20">
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white">Our Core Values</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mt-1">The foundational principles guiding every action we take</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    <!-- Value Pills -->
+                    <script>
+                        const values = [
+                            { title: 'Equality', icon: 'scale' },
+                            { title: 'Respect', icon: 'heart' },
+                            { title: 'Equity', icon: 'balance' },
+                            { title: 'Perseverance', icon: 'mountain' },
+                            { title: 'Ownership', icon: 'shield' },
+                            { title: 'Belonging', icon: 'home' },
+                            { title: 'Commitment', icon: 'check-circle' },
+                            { title: 'Inclusivity', icon: 'globe' },
+                            { title: 'Empathy', icon: 'smile' },
+                            { title: 'Action', icon: 'zap' },
+                            { title: 'Trust', icon: 'key' },
+                            { title: 'Accountability', icon: 'clipboard-check' }
+                        ];
+                    </script>
+                    <!-- Dynamically or statically created for speed -->
+                    <div class="p-4 rounded-xl glass-card text-center hover:border-brand-500 hover:shadow-md transition-all flex flex-col items-center gap-2">
+                        <i data-lucide="scale" class="w-5 h-5 text-brand-600 dark:text-emerald-400"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Equality</span>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card text-center hover:border-brand-500 hover:shadow-md transition-all flex flex-col items-center gap-2">
+                        <i data-lucide="heart" class="w-5 h-5 text-brand-600 dark:text-emerald-400"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Respect</span>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card text-center hover:border-brand-500 hover:shadow-md transition-all flex flex-col items-center gap-2">
+                        <i data-lucide="sliders" class="w-5 h-5 text-brand-600 dark:text-emerald-400"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Equity</span>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card text-center hover:border-brand-500 hover:shadow-md transition-all flex flex-col items-center gap-2">
+                        <i data-lucide="mountain" class="w-5 h-5 text-brand-600 dark:text-emerald-400"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Perseverance</span>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card text-center hover:border-brand-500 hover:shadow-md transition-all flex flex-col items-center gap-2">
+                        <i data-lucide="shield" class="w-5 h-5 text-brand-600 dark:text-emerald-400"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Ownership</span>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card text-center hover:border-brand-500 hover:shadow-md transition-all flex flex-col items-center gap-2">
+                        <i data-lucide="home" class="w-5 h-5 text-brand-600 dark:text-emerald-400"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Belonging</span>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card text-center hover:border-brand-500 hover:shadow-md transition-all flex flex-col items-center gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-brand-600 dark:text-emerald-400"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Commitment</span>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card text-center hover:border-brand-500 hover:shadow-md transition-all flex flex-col items-center gap-2">
+                        <i data-lucide="globe" class="w-5 h-5 text-brand-600 dark:text-emerald-400"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Inclusivity</span>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card text-center hover:border-brand-500 hover:shadow-md transition-all flex flex-col items-center gap-2">
+                        <i data-lucide="smile" class="w-5 h-5 text-brand-600 dark:text-emerald-400"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Empathy</span>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card text-center hover:border-brand-500 hover:shadow-md transition-all flex flex-col items-center gap-2">
+                        <i data-lucide="zap" class="w-5 h-5 text-brand-600 dark:text-emerald-400"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Action</span>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card text-center hover:border-brand-500 hover:shadow-md transition-all flex flex-col items-center gap-2">
+                        <i data-lucide="key" class="w-5 h-5 text-brand-600 dark:text-emerald-400"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Trust</span>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card text-center hover:border-brand-500 hover:shadow-md transition-all flex flex-col items-center gap-2">
+                        <i data-lucide="clipboard-check" class="w-5 h-5 text-brand-600 dark:text-emerald-400"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Accountability</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOUR THEMATIC WORK AREAS -->
+    <section id="pillars" class="py-24 bg-emerald-100/40 dark:bg-brand-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-600 dark:text-emerald-400 text-sm font-bold tracking-widest uppercase">Pillars of Action</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-2">What We're Working On</h2>
+                <p class="text-slate-600 dark:text-slate-300 mt-3 text-base">
+                    CLAN's activities take the form of campaigns, local initiatives, and project collaborations shaped by members' interests and community needs.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Area 1 -->
+                <div class="glass-card p-8 rounded-2xl hover:shadow-2xl hover:-translate-y-1 transition-all group border-l-4 border-l-brand-600">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-100 dark:bg-emerald-900/60 text-brand-600 dark:text-emerald-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="landmark" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Engagements with Local Self-Governments</h3>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Promoting youth participation in local climate governance, and creating space for young people to engage directly with the institutions that shape climate decisions.
+                    </p>
+                </div>
+
+                <!-- Area 2 -->
+                <div class="glass-card p-8 rounded-2xl hover:shadow-2xl hover:-translate-y-1 transition-all group border-l-4 border-l-amberAccent-500">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-100 dark:bg-amber-950/60 text-amberAccent-600 dark:text-amberAccent-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="baby" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Engagements with Children</h3>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Building climate awareness and resilience among younger generations, through hands-on work with schools and the communities around them.
+                    </p>
+                </div>
+
+                <!-- Area 3 -->
+                <div class="glass-card p-8 rounded-2xl hover:shadow-2xl hover:-translate-y-1 transition-all group border-l-4 border-l-teal-500">
+                    <div class="w-14 h-14 rounded-2xl bg-teal-100 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="megaphone" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Climate and Communications</h3>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Enhancing storytelling, public outreach, media engagement, and capacity building among CLAN members to amplify youth voices.
+                    </p>
+                </div>
+
+                <!-- Area 4 -->
+                <div class="glass-card p-8 rounded-2xl hover:shadow-2xl hover:-translate-y-1 transition-all group border-l-4 border-l-emerald-400">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="database" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Open Data and Knowledge Sharing</h3>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Creating accessible, data-driven resources so climate action across the network — and far beyond it — can be more informed and effective.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ORGANIZATIONAL STRUCTURE SECTION -->
+    <section id="structure" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-600 dark:text-emerald-400 text-sm font-bold tracking-widest uppercase">Members & Governance</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-2">Organisational Structure</h2>
+                <p class="text-slate-600 dark:text-slate-300 mt-3">A transparent, youth-led democratic framework driving collective decisions.</p>
+            </div>
+
+            <!-- Org Chart Visual -->
+            <div class="max-w-4xl mx-auto flex flex-col items-center space-y-8">
+                
+                <!-- Top Box: Executive Committee -->
+                <div class="w-full glass-card border-2 border-brand-500 rounded-2xl p-6 shadow-xl text-center relative">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-0.5 bg-brand-600 text-white text-xs font-bold rounded-full uppercase tracking-wider">
+                        Leadership Core
+                    </span>
+                    <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mt-2">Executive Committee</h3>
+                    <p class="text-xs text-brand-600 dark:text-emerald-400 font-semibold mb-6">21-Member Executive Body</p>
+
+                    <!-- Core 5 Officers -->
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mt-4">
+                        <div class="p-3 bg-emerald-100/60 dark:bg-emerald-900/40 rounded-xl">
+                            <i data-lucide="user-check" class="w-5 h-5 text-brand-600 dark:text-emerald-400 mx-auto mb-1"></i>
+                            <div class="font-bold text-xs text-slate-900 dark:text-white">President</div>
+                        </div>
+                        <div class="p-3 bg-emerald-100/60 dark:bg-emerald-900/40 rounded-xl">
+                            <i data-lucide="user-plus" class="w-5 h-5 text-brand-600 dark:text-emerald-400 mx-auto mb-1"></i>
+                            <div class="font-bold text-xs text-slate-900 dark:text-white">Vice-President</div>
+                        </div>
+                        <div class="p-3 bg-emerald-100/60 dark:bg-emerald-900/40 rounded-xl">
+                            <i data-lucide="file-text" class="w-5 h-5 text-brand-600 dark:text-emerald-400 mx-auto mb-1"></i>
+                            <div class="font-bold text-xs text-slate-900 dark:text-white">Secretary</div>
+                        </div>
+                        <div class="p-3 bg-emerald-100/60 dark:bg-emerald-900/40 rounded-xl">
+                            <i data-lucide="files" class="w-5 h-5 text-brand-600 dark:text-emerald-400 mx-auto mb-1"></i>
+                            <div class="font-bold text-xs text-slate-900 dark:text-white">Joint Secretary</div>
+                        </div>
+                        <div class="p-3 bg-emerald-100/60 dark:bg-emerald-900/40 col-span-2 sm:col-span-1 rounded-xl">
+                            <i data-lucide="coins" class="w-5 h-5 text-brand-600 dark:text-emerald-400 mx-auto mb-1"></i>
+                            <div class="font-bold text-xs text-slate-900 dark:text-white">Treasurer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connector line -->
+                <div class="w-0.5 h-10 bg-brand-500/50"></div>
+
+                <!-- Bottom Box: General Body -->
+                <div class="w-full glass-card border-2 border-emerald-300 dark:border-emerald-700 rounded-2xl p-6 shadow-xl text-center">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">General Body</h3>
+                    <p class="text-3xl font-extrabold text-brand-600 dark:text-emerald-400 my-2">115+ Members</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 max-w-lg mx-auto">
+                        Composed of passionate climate leaders, program alumni, and youth advocates across multiple regions driving grassroots activities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORIES & NEWS SECTION -->
+    <section id="stories" class="py-24 bg-emerald-100/30 dark:bg-brand-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-brand-600 dark:text-emerald-400 text-sm font-bold tracking-widest uppercase">Updates & Field Insights</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1">Stories, News & Updates</h2>
+                </div>
+                
+                <!-- Category Filter Buttons -->
+                <div id="blogFilters" class="flex flex-wrap gap-2 mt-6 md:mt-0">
+                    <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs font-bold transition-all bg-brand-600 text-white">All</button>
+                    <button data-filter="News" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-white dark:bg-brand-900 text-slate-700 dark:text-slate-300 hover:bg-emerald-100">News</button>
+                    <button data-filter="Stories" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-white dark:bg-brand-900 text-slate-700 dark:text-slate-300 hover:bg-emerald-100">Stories</button>
+                    <button data-filter="Conversations" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-white dark:bg-brand-900 text-slate-700 dark:text-slate-300 hover:bg-emerald-100">Conversations</button>
+                    <button data-filter="Field Notes" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-white dark:bg-brand-900 text-slate-700 dark:text-slate-300 hover:bg-emerald-100">Field Notes</button>
+                </div>
+            </div>
+
+            <!-- Articles Cards Grid -->
+            <div id="articlesGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <div class="article-card glass-card rounded-2xl overflow-hidden shadow-lg border hover:shadow-2xl transition-all" data-category="News">
+                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80" alt="CLAN Assembly" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="px-3 py-1 rounded-md text-[10px] font-extrabold uppercase bg-brand-100 text-brand-800 dark:bg-brand-900 dark:text-emerald-300">News</span>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mt-3 leading-snug">CLAN Expands Membership Across Four States</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm mt-2">Official announcement on new state hubs and member orientation programs for 2026.</p>
+                        <a href="#contact" class="mt-4 inline-flex items-center text-xs font-bold text-brand-600 dark:text-emerald-400 gap-1 hover:gap-2 transition-all">Read More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+                    </div>
+                </div>
+
+                <!-- Article 2 -->
+                <div class="article-card glass-card rounded-2xl overflow-hidden shadow-lg border hover:shadow-2xl transition-all" data-category="Stories">
+                    <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=600&q=80" alt="Youth Community Action" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="px-3 py-1 rounded-md text-[10px] font-extrabold uppercase bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">Stories</span>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mt-3 leading-snug">Empowering Coastal Youth in Local Governance</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm mt-2">How CLP alumni collaborated with village panchayats for coastal climate protection.</p>
+                        <a href="#contact" class="mt-4 inline-flex items-center text-xs font-bold text-brand-600 dark:text-emerald-400 gap-1 hover:gap-2 transition-all">Read More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+                    </div>
+                </div>
+
+                <!-- Article 3 -->
+                <div class="article-card glass-card rounded-2xl overflow-hidden shadow-lg border hover:shadow-2xl transition-all" data-category="Field Notes">
+                    <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=600&q=80" alt="Field Work" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="px-3 py-1 rounded-md text-[10px] font-extrabold uppercase bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300">Field Notes</span>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mt-3 leading-snug">Mapping Micro-Climate Data in Schools</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm mt-2">Documentation of open data collection initiatives executed by CLAN members.</p>
+                        <a href="#contact" class="mt-4 inline-flex items-center text-xs font-bold text-brand-600 dark:text-emerald-400 gap-1 hover:gap-2 transition-all">Read More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY / MEDIA SECTION ("CLAN IN ACTION") -->
+    <section id="gallery" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-brand-600 dark:text-emerald-400 text-sm font-bold tracking-widest uppercase">Visual Footprint</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1">CLAN in Action</h2>
+                <p class="text-slate-600 dark:text-slate-300 mt-2 text-sm">Moments of collaboration, leadership, and community engagement.</p>
+            </div>
+
+            <!-- Gallery Filters -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10" id="galleryFilters">
+                <button data-gallery-filter="all" class="gallery-btn active px-4 py-2 rounded-xl text-xs font-bold bg-brand-600 text-white">All Work</button>
+                <button data-gallery-filter="Events" class="gallery-btn px-4 py-2 rounded-xl text-xs font-bold bg-white dark:bg-brand-900 text-slate-700 dark:text-slate-300 hover:bg-emerald-100">Events</button>
+                <button data-gallery-filter="Engagement" class="gallery-btn px-4 py-2 rounded-xl text-xs font-bold bg-white dark:bg-brand-900 text-slate-700 dark:text-slate-300 hover:bg-emerald-100">Community Engagement</button>
+                <button data-gallery-filter="Campaigns" class="gallery-btn px-4 py-2 rounded-xl text-xs font-bold bg-white dark:bg-brand-900 text-slate-700 dark:text-slate-300 hover:bg-emerald-100">Campaigns</button>
+            </div>
+
+            <!-- Media Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="galleryGrid">
+                <div class="gallery-item group relative overflow-hidden rounded-2xl cursor-pointer shadow-md" data-category="Events" onclick="openLightbox('https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=80', 'Annual Leadership Summit')">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=500&q=80" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white">
+                        <span class="text-[10px] uppercase font-bold text-emerald-400">Events</span>
+                        <p class="font-bold text-sm">Annual Leadership Summit</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item group relative overflow-hidden rounded-2xl cursor-pointer shadow-md" data-category="Engagement" onclick="openLightbox('https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1000&q=80', 'School Awareness Workshop')">
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=500&q=80" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white">
+                        <span class="text-[10px] uppercase font-bold text-amberAccent-400">Community Engagement</span>
+                        <p class="font-bold text-sm">School Awareness Workshop</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item group relative overflow-hidden rounded-2xl cursor-pointer shadow-md" data-category="Campaigns" onclick="openLightbox('https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop&w=1000&q=80', 'Youth Tree Planting Campaign')">
+                    <img src="https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop&w=500&q=80" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white">
+                        <span class="text-[10px] uppercase font-bold text-emerald-400">Campaigns</span>
+                        <p class="font-bold text-sm">Tree Plantation Campaign</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item group relative overflow-hidden rounded-2xl cursor-pointer shadow-md" data-category="Events" onclick="openLightbox('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80', 'Panchayat Governance Consultation')">
+                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=500&q=80" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white">
+                        <span class="text-[10px] uppercase font-bold text-emerald-400">Events</span>
+                        <p class="font-bold text-sm">Panchayat Consultation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4 backdrop-blur-md">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white hover:text-emerald-400"><i data-lucide="x" class="w-8 h-8"></i></button>
+        <div class="max-w-4xl w-full text-center">
+            <img id="lightboxImg" src="" class="max-h-[80vh] mx-auto rounded-xl shadow-2xl object-contain">
+            <p id="lightboxCaption" class="text-white font-bold text-lg mt-4"></p>
+        </div>
+    </div>
+
+    <!-- JOIN CLAN CTA SECTION -->
+    <section id="join" class="py-20 bg-gradient-to-r from-brand-800 via-brand-700 to-emerald-900 text-white relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <i data-lucide="globe-2" class="w-12 h-12 text-emerald-400 mx-auto mb-4 animate-bounce"></i>
+            <h2 class="text-3xl sm:text-5xl font-extrabold mb-4">Ready to shape climate action?</h2>
+            <p class="text-lg text-emerald-100 max-w-2xl mx-auto mb-8">
+                Are you interested in climate action, collaboration, learning, and collective work? Become a part of CLAN today.
+            </p>
+            <a href="#contact" class="inline-flex items-center gap-3 bg-amberAccent-500 hover:bg-amberAccent-600 text-slate-900 font-extrabold px-8 py-4 rounded-xl text-lg shadow-xl hover:scale-105 transition-all">
+                <span>Join Climate Leaders Action Network</span>
+                <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- CONTACT & COMMUNITY SECTION -->
+    <section id="contact" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Contact Info & Socials -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="text-brand-600 dark:text-emerald-400 text-sm font-bold tracking-widest uppercase">Get in Touch</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1">Let's Connect</h2>
+                        <p class="text-slate-600 dark:text-slate-300 mt-3 text-sm leading-relaxed">
+                            Climate action grows through connections, conversations and collaboration. Reach out to us or join our online community.
+                        </p>
+                    </div>
+
+                    <!-- Direct Social Links -->
+                    <div class="space-y-4">
+                        <a href="mailto:info@clan-network.org" class="flex items-center gap-4 p-4 rounded-xl glass-card hover:border-brand-500 transition-all">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-brand-600 dark:text-emerald-400 flex items-center justify-center">
+                                <i data-lucide="mail" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-slate-400">Email Us</div>
+                                <div class="text-sm font-bold text-slate-800 dark:text-slate-100">info@clan-network.org</div>
+                            </div>
+                        </a>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <a href="#" class="p-3.5 rounded-xl glass-card flex items-center gap-3 hover:border-brand-500 transition-all text-xs font-bold text-slate-700 dark:text-slate-200">
+                                <i data-lucide="instagram" class="w-4 h-4 text-pink-500"></i> Instagram
+                            </a>
+                            <a href="#" class="p-3.5 rounded-xl glass-card flex items-center gap-3 hover:border-brand-500 transition-all text-xs font-bold text-slate-700 dark:text-slate-200">
+                                <i data-lucide="linkedin" class="w-4 h-4 text-blue-500"></i> LinkedIn
+                            </a>
+                            <a href="#" class="p-3.5 rounded-xl glass-card flex items-center gap-3 hover:border-brand-500 transition-all text-xs font-bold text-slate-700 dark:text-slate-200">
+                                <i data-lucide="youtube" class="w-4 h-4 text-red-500"></i> YouTube
+                            </a>
+                            <a href="#" class="p-3.5 rounded-xl glass-card flex items-center gap-3 hover:border-brand-500 transition-all text-xs font-bold text-slate-700 dark:text-slate-200">
+                                <i data-lucide="twitter" class="w-4 h-4 text-sky-400"></i> X / Twitter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-7">
+                    <div class="glass-card p-8 rounded-2xl border shadow-xl">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6">Send Us a Message</h3>
+                        <form id="contactForm" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Your Name</label>
+                                    <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-brand-900/50 border border-slate-200 dark:border-emerald-800 focus:outline-none focus:border-brand-600 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Email Address</label>
+                                    <input type="email" required class="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-brand-900/50 border border-slate-200 dark:border-emerald-800 focus:outline-none focus:border-brand-600 text-sm">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Subject</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-brand-900/50 border border-slate-200 dark:border-emerald-800 focus:outline-none focus:border-brand-600 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Message</label>
+                                <textarea rows="4" required class="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-brand-900/50 border border-slate-200 dark:border-emerald-800 focus:outline-none focus:border-brand-600 text-sm"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
+                                <span>Send Message</span>
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+                        <div id="formSuccess" class="hidden mt-4 p-4 rounded-xl bg-emerald-100 dark:bg-emerald-900 text-brand-800 dark:text-emerald-200 text-sm font-bold text-center">
+                            Thank you! Your message has been sent successfully.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-900 text-white border-t border-emerald-800/50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-bold">
+                    <i data-lucide="leaf" class="w-5 h-5"></i>
+                </div>
+                <span class="font-extrabold text-lg">CLAN</span>
+                <span class="text-xs text-emerald-400">© 2026 Climate Leaders Action Network</span>
+            </div>
+            <div class="text-xs text-emerald-300/70">
+                Youth-led • Community-centred • Regenerative Action
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVITY JAVASCRIPT -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Theme Toggle Functionality
+        const themeToggleBtns = [document.getElementById('themeToggle'), document.getElementById('mobileThemeToggle')];
+        themeToggleBtns.forEach(btn => {
+            btn?.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+            });
+        });
+
+        // Mobile Menu Drawer
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn?.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close Mobile Menu on link click
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Stories / Blog Filter
+        const blogFilterBtns = document.querySelectorAll('#blogFilters .filter-btn');
+        const articles = document.querySelectorAll('#articlesGrid .article-card');
+
+        blogFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                blogFilterBtns.forEach(b => b.classList.remove('bg-brand-600', 'text-white'));
+                blogFilterBtns.forEach(b => b.classList.add('bg-white', 'dark:bg-brand-900', 'text-slate-700', 'dark:text-slate-300'));
+                
+                btn.classList.add('bg-brand-600', 'text-white');
+                const filter = btn.getAttribute('data-filter');
+
+                articles.forEach(article => {
+                    if (filter === 'all' || article.getAttribute('data-category') === filter) {
+                        article.style.display = 'block';
+                    } else {
+                        article.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Gallery Filter
+        const galleryFilterBtns = document.querySelectorAll('#galleryFilters .gallery-btn');
+        const galleryItems = document.querySelectorAll('#galleryGrid .gallery-item');
+
+        galleryFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                galleryFilterBtns.forEach(b => b.classList.remove('bg-brand-600', 'text-white'));
+                galleryFilterBtns.forEach(b => b.classList.add('bg-white', 'dark:bg-brand-900', 'text-slate-700', 'dark:text-slate-300'));
+
+                btn.classList.add('bg-brand-600', 'text-white');
+                const filter = btn.getAttribute('data-gallery-filter');
+
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Lightbox Handler
+        function openLightbox(imgUrl, caption) {
+            const modal = document.getElementById('lightboxModal');
+            document.getElementById('lightboxImg').src = imgUrl;
+            document.getElementById('lightboxCaption').textContent = caption;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Contact Form Mock Submit
+        document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('contactForm').reset();
+            const successMsg = document.getElementById('formSuccess');
+            successMsg.classList.remove('hidden');
+            setTimeout(() => successMsg.classList.add('hidden'), 4000);
+        });
+    </script>
+</body>
+</html>
